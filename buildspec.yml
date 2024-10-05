@@ -9,7 +9,7 @@ phases:
       - COMMIT_HASH=$(echo $CODEBUILD_RESOLVED_SOURCE_VERSION | cut -c 1-7)
       - IMAGE_TAG=${COMMIT_HASH:-latest}
   build:
-    commands:
+    commands:  
       - echo Build started on `date`
       - echo Building the Docker image...          
       - docker build -t $REPOSITORY_URI:latest .
@@ -21,7 +21,7 @@ phases:
       - docker push $REPOSITORY_URI:latest
       - docker push $REPOSITORY_URI:$IMAGE_TAG
       - echo Writing image definitions file...
-      - printf '[{"name":"%s","imageUri":"%s"}]' "$IMAGE_REPO_NAME" "$REPOSITORY_URI:$IMAGE_TAG" > imagedefinitions.json
+      - printf '[{"name":"%s","imageUri":"%s"}]' "$IMAGE_REPO_NAME" "$REPOSITORY_URI:$IMAGE_TAG" > imagedefinitions.json  
 
 artifacts:
   files:
@@ -39,3 +39,4 @@ artifacts:
 
 
 
+  
